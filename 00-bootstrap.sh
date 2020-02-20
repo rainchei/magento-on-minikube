@@ -29,7 +29,7 @@ install_istio() {
 main() {
   cd $(dirname $0)
 
-  echo "== Starting to bootstraping."
+  echo "== Starting to bootstrap."
   echo ""
 
   echo "Checking prerequisites."
@@ -69,7 +69,7 @@ main() {
   install_istio
 
   echo ""
-  echo "== Done for bootstrapping."
+  echo "== Done for bootstrap."
 }
 
 
