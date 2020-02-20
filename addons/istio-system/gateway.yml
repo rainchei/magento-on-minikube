@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: viveport-gateway
+  namespace: istio-system
+spec:
+  selector:
+    istio: ingressgateway  # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+  - port:
+      number: 31400
+      name: tcp-mongolog
+      protocol: TCP
+    hosts:
+    - "*"

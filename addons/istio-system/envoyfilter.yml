@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: fix-passthrough-timeout
+  namespace: istio-system
+spec:
+  configPatches:
+  - applyTo: HTTP_ROUTE
+    match:
+      context: SIDECAR_OUTBOUND # will match outbound listeners in all sidecars
+      routeConfiguration:
+        vhost:
+          name: "allow_any" # match the passthrough route
+    patch:
+      operation: MERGE
+      value:
+        route:
+          timeout: 0s
