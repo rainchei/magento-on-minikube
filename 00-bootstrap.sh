@@ -74,3 +74,19 @@ main() {
 
 
 main
+
+
+## ====== Documentary-Commands ======
+
+## Istio Bootstraps
+#export ISTIO_VERSION='1.4.2'
+#helm template $HOME/istio-$ISTIO_VERSION/install/kubernetes/helm/istio-init --name-template istio-init --namespace istio-system \
+#  > addons/istio-system/istio-crds/istio-crds.yml
+#helm template $HOME/istio-$ISTIO_VERSION/install/kubernetes/helm/istio --name-template istio --namespace istio-system \
+#  --set prometheus.enabled=false \
+#  --set tracing.enabled=false \
+#  \
+#  --set pilot.env.PILOT_ENABLE_FALLTHROUGH_ROUTE=1 \
+#  --set gateways.istio-ingressgateway.type=NodePort \
+#  \
+#  > addons/istio-system/istio/istio-install.yml
