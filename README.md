@@ -12,7 +12,7 @@ First, we need to install some packages.
 
 # Bootstrapping
 
-We will bootstrap a kube cluster and install [Istio](https://istio.io), which is the default "Service Mesh" we use in "Viveport".
+We will bootstrap a kube cluster and install [Istio](https://istio.io).
 
 Please start `Docker.app` before running the following script.
 
