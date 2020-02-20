@@ -1,0 +1,1 @@
+# magento-on-minikube
