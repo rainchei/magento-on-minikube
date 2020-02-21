@@ -57,18 +57,18 @@ main() {
   minikube ssh "sudo mkdir /data/elasticsearch /data/mysql /data/redis /data/magento"
   minikube ssh "sudo chown -R 1000:1000 /data/"
 
-  echo "Creating required namespaces."
-  kubectl create --save-config namespace istio-system
-  kubectl create --save-config namespace app && \
-    kubectl label namespace app istio-injection=enabled
-  kubectl create --save-config namespace db && \
-    kubectl label namespace db istio-injection=enabled
-  echo ""
+  #echo "Creating required namespaces."
+  #kubectl create --save-config namespace istio-system
+  #kubectl create --save-config namespace app && \
+  #  kubectl label namespace app istio-injection=enabled
+  #kubectl create --save-config namespace db && \
+  #  kubectl label namespace db istio-injection=enabled
+  #echo ""
 
-  echo "Installing addons."
-  install_kube
-  install_istio
-  echo ""
+  #echo "Installing addons."
+  #install_kube
+  #install_istio
+  #echo ""
 
   echo "== Done for bootstrap."
 }

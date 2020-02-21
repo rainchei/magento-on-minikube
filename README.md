@@ -12,9 +12,9 @@ First, we need to install some packages.
 
 # Bootstrapping
 
-We will bootstrap a kube cluster and install [Istio](https://istio.io).
+We will bootstrap a kube cluster using a shell script.
 
-Please start `Docker.app` before running the following script.
+Please start `Docker.app` before running the following.
 
 ```
 bash 00-bootstrap.sh
