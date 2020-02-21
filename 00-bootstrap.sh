@@ -15,17 +15,6 @@ setenv() {
   export KUBECONFIG="${HOME}/.kube/config"
 }
 
-install_kube() {
-  kubectl -n kube-system apply -f ./addons/kube-system/kube/
-}
-
-install_istio() {
-  kubectl -n istio-system apply -f ./addons/istio-system/istio-crds/
-  echo "Waiting for istio-crds to be ready..."
-  kubectl -n istio-system wait --for=condition=complete job --all --timeout=60s
-  kubectl -n istio-system apply -f ./addons/istio-system/istio/
-}
-
 main() {
   cd $(dirname $0)
 
@@ -54,21 +43,16 @@ main() {
   # Re-use the docker daemon on local machine inside minikube.
   eval $(minikube docker-env)
   # Create directories for persistent volumes.
-  minikube ssh "sudo mkdir /data/elasticsearch /data/mysql /data/redis /data/magento"
+  minikube ssh "sudo mkdir /data/elasticsearch /data/mysql /data/magento"
   minikube ssh "sudo chown -R 1000:1000 /data/"
+  # Elasticsearch requires vm.max_map_count to be at least 262144.
+  # If your OS already sets up this number to a higher value, feel free
+  # to remove this line.
+  minikube ssh "sudo /sbin/sysctl -w vm.max_map_count=262144"
 
-  #echo "Creating required namespaces."
-  #kubectl create --save-config namespace istio-system
-  #kubectl create --save-config namespace app && \
-  #  kubectl label namespace app istio-injection=enabled
-  #kubectl create --save-config namespace db && \
-  #  kubectl label namespace db istio-injection=enabled
-  #echo ""
-
-  #echo "Installing addons."
-  #install_kube
-  #install_istio
-  #echo ""
+  echo "Enabling minikube addons."
+  minikube addons enable metrics-server
+  minikube addons enable istio
 
   echo "== Done for bootstrap."
 }
