@@ -30,4 +30,4 @@ bash 01-deploy.sh db elasticsearch
 bash 01-deploy.sh app magento
 ```
 
-Then you can access your application at http://localhost:31380/
+Then you can access your application at http://localhost-magento.example.com
