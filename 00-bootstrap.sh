@@ -37,12 +37,9 @@ main() {
   prerequisites docker
   echo ""
 
-  echo "Setting env."
-  setenv
-  echo ""
-
   echo "Starting minikube."
   # Start minikube.
+  setenv
   minikube start \
     --memory=16384 --cpus=4 \
     --kubernetes-version=${KUBE_VERSION} \
