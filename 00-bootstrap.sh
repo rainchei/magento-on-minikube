@@ -50,8 +50,6 @@ main() {
   # If your OS already sets up this number to a higher value, feel free
   # to remove this line.
   minikube ssh "sudo /sbin/sysctl -w vm.max_map_count=262144"
-  # Append /etc/hosts for 'magento' landing page
-  echo $(minikube ip) localhost-magento.example.com | sudo tee -a /etc/hosts
 
   echo "Enabling minikube addons."
   minikube addons enable metrics-server
