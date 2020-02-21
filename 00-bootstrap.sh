@@ -64,7 +64,8 @@ main() {
   kubectl create --save-config namespace istio-system
   kubectl create --save-config namespace app && \
     kubectl label namespace app istio-injection=enabled
-  kubectl create --save-config namespace db
+  kubectl create --save-config namespace db && \
+    kubectl label namespace db istio-injection=enabled
   echo ""
 
   echo "Installing addons."
