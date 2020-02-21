@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: magento
+spec:
+  selector:
+    matchLabels:
+      app: magento
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: magento
+    spec:
+      containers:
+      - image: bitnami/magento:2
+        name: magento
+        envFrom:
+        - configMapRef:
+            name: magento
+        ports:
+        - name: https
+          containerPort: 443
+        - name: http
+          containerPort: 80
+        volumeMounts:
+        - name: magento-persistent-storage
+          mountPath: /bitnami
+      volumes:
+      - name: magento-persistent-storage
+        persistentVolumeClaim:
+          claimName: magento-pv-claim
+      securityContext:
+        fsGroup: 1000

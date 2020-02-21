@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: elasticsearch
+  name: mariadb
 spec:
   clusterIP: None
   selector:
-    app: elasticsearch
+    app: mariadb
   ports:
-  - port: 9200
+  - port: 3306

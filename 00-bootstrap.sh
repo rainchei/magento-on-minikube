@@ -34,6 +34,7 @@ main() {
     --kubernetes-version=${KUBE_VERSION} \
     --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/minikube/certs/ca.crt" \
     --extra-config=controller-manager.cluster-signing-key-file="/var/lib/minikube/certs/ca.key" \
+    --extra-config=apiserver.service-node-port-range=80-30000 \
     --vm-driver=virtualbox
   echo ""
 
@@ -43,7 +44,7 @@ main() {
   # Re-use the docker daemon on local machine inside minikube.
   eval $(minikube docker-env)
   # Create directories for persistent volumes.
-  minikube ssh "sudo mkdir /data/elasticsearch /data/mysql /data/magento"
+  minikube ssh "sudo mkdir -p /data/elasticsearch /data/mariadb /data/magento"
   minikube ssh "sudo chown -R 1000:1000 /data/"
   # Elasticsearch requires vm.max_map_count to be at least 262144.
   # If your OS already sets up this number to a higher value, feel free
@@ -52,7 +53,6 @@ main() {
 
   echo "Enabling minikube addons."
   minikube addons enable metrics-server
-  minikube addons enable istio
 
   echo "== Done for bootstrap."
 }

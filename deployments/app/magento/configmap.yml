@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: magento
+data:
+  # user and site
+  MAGENTO_USERNAME: user
+  MAGENTO_PASSWORD: bitnami1
+  MAGENTO_EMAIL: user@example.com
+  MAGENTO_ADMINURI: admin
+  MAGENTO_FIRSTNAME: FirstName
+  MAGENTO_LASTNAME: LastName
+  MAGENTO_HOST: localhost-magento.example.com
+  EXTERNAL_HTTP_PORT_NUMBER: '80'
+  EXTERNAL_HTTPS_PORT_NUMBER: '443'
+  MAGENTO_MODE: default
+  # search
+  ELASTICSEARCH_HOST: elasticsearch.db.svc.cluster.local
+  ELASTICSEARCH_PORT_NUMBER: '9200'
+  # db
+  MARIADB_HOST: mariadb.db.svc.cluster.local
+  MARIADB_PORT_NUMBER: '3306'
+  MAGENTO_DATABASE_USER: bn_magento
+  MAGENTO_DATABASE_PASSWORD: magento_db_password
+  MAGENTO_DATABASE_NAME: bitnami_magento
+  ALLOW_EMPTY_PASSWORD: 'no'
