@@ -2,15 +2,15 @@
 set -eo pipefail
 
 main() {
+  cd $(dirname $0)
+
   local ns="$1"
   local app="$2"
-  local app_path="./deployments/${ns}/${app}/"
+  local app_path="$(pwd)/deployments/${ns}/${app}/"
 
   if [[ -z "${ns}" ]] || [[ -z "${app}" ]]; then
     usage
   fi
-
-  cd $(dirname $0)
 
   # must have at least one yaml to proceed
   ls ${app_path} | egrep "[a-z|0-9]+.ya?ml" &> /dev/null \
@@ -55,20 +55,20 @@ deploy_to_apply() {
   local ns="$1"
   local app="$2"
   local yml="$3"
-
-  local kubeval="docker run -i --rm --name kubeval -v ${yml_path}:/sample garethr/kubeval sample/*"
-
-  local yml_path="./deployments/${ns}/${app}/${yml}"
+  local yml_path="$(pwd)/deployments/${ns}/${app}/${yml}"
+  local kubeval="docker run -i --rm --name kubeval -v ${yml_path}:/${ns}/${app}/${yml} garethr/kubeval /${ns}/${app}/${yml}"
 
   echo "Validating k8s yaml policy."
   cat "${yml_path}" \
     | ${kubeval} \
     || fail "NO PASS." 101 \
   echo "PASS."
+  echo ""
 
   echo "Applying ${yml} for ${ns}/${app}."
   cat "${yml_path}" \
     | kubectl apply -n "${ns}" -f -
+  echo ""
 }
 
 ## ================================================
