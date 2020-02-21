@@ -58,7 +58,7 @@ deploy_to_apply() {
 
   local kubeval="docker run -i --rm --name kubeval -v ${yml_path}:/sample garethr/kubeval sample/*"
 
-  local yml_path="./deployment/${ns}/${app}/${yml}"
+  local yml_path="./deployments/${ns}/${app}/${yml}"
 
   echo "Validating k8s yaml policy."
   cat "${yml_path}" \
