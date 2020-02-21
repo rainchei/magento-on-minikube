@@ -30,15 +30,16 @@ main() {
   cd $(dirname $0)
 
   echo "== Starting to bootstrap."
-  echo ""
 
   echo "Checking prerequisites."
   prerequisites minikube
   prerequisites kubectl
   prerequisites docker
+  echo ""
 
   echo "Setting env."
   setenv
+  echo ""
 
   echo "Starting minikube."
   # Start minikube.
@@ -48,6 +49,7 @@ main() {
     --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/minikube/certs/ca.crt" \
     --extra-config=controller-manager.cluster-signing-key-file="/var/lib/minikube/certs/ca.key" \
     --vm-driver=virtualbox
+  echo ""
 
   # Check if minikube is up and kubectl is properly configured.
   minikube status
@@ -63,12 +65,13 @@ main() {
   kubectl create --save-config namespace app && \
     kubectl label namespace app istio-injection=enabled
   kubectl create --save-config namespace db
+  echo ""
 
   echo "Installing addons."
   install_kube
   install_istio
-
   echo ""
+
   echo "== Done for bootstrap."
 }
 
