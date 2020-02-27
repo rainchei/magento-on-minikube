@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: magento
+  name: magento-blue
 spec:
   selector:
     matchLabels:
-      app: magento
+      app: magento-blue
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: magento
+        app: magento-blue
     spec:
       containers:
-      - image: bitnami/magento:2
+      - image: rainchei/docker-bitnami-magento:b53f5edd85-20200227
         name: magento
         envFrom:
         - configMapRef:
-            name: magento
+            name: magento-blue
         ports:
         - name: https
           containerPort: 443
