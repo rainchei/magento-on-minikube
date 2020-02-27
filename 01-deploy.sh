@@ -1,8 +1,13 @@
 #!/bin/bash
 set -eo pipefail
 
+setenv() {
+  export KUBECONFIG="${HOME}/.kube/config"
+}
+
 main() {
   cd $(dirname $0)
+  setenv
 
   local ns="$1"
   local app="$2"
