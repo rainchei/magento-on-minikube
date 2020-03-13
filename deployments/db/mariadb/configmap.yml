@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mariadb
-data:
-  ALLOW_EMPTY_PASSWORD: "yes"
-  MARIADB_USER: bn_magento
-  MARIADB_PASSWORD: magento_db_password
-  MARIADB_DATABASE: bitnami_magento

@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mariadb-pv-claim
+  name: mysql-pv-claim
 spec:
   storageClassName: manual
-  volumeName: mariadb-pv-volume
+  volumeName: mysql-pv-volume
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 10Gi

@@ -19,7 +19,8 @@ Please start `Docker.app` before running the following commands.
 ```
 ./00-bootstrap.sh
 
-# Append minikube ip to /etc/hosts for 'magento' landing page.
+# Append minikube ip to /etc/hosts
+echo $(minikube ip) localhost-docker | sudo tee -a /etc/hosts
 echo $(minikube ip) localhost-magento.example.com | sudo tee -a /etc/hosts
 ```
 
@@ -28,8 +29,9 @@ echo $(minikube ip) localhost-magento.example.com | sudo tee -a /etc/hosts
 Finally, run these commands to deploy our magento app and its relevant db.
 
 ```
-./01-deploy.sh db mariadb
+./01-deploy.sh db mysql
 ./01-deploy.sh db elasticsearch
+./01-deploy.sh db redis
 ./01-deploy.sh app magento
 ```
 

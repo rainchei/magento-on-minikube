@@ -3,24 +3,19 @@ kind: ConfigMap
 metadata:
   name: magento
 data:
-  # user and site
-  MAGENTO_USERNAME: user
-  MAGENTO_PASSWORD: bitnami1
-  MAGENTO_EMAIL: user@example.com
-  MAGENTO_ADMINURI: admin
-  MAGENTO_FIRSTNAME: FirstName
-  MAGENTO_LASTNAME: LastName
-  MAGENTO_HOST: localhost-magento.example.com
-  EXTERNAL_HTTP_PORT_NUMBER: '80'
-  EXTERNAL_HTTPS_PORT_NUMBER: '443'
-  MAGENTO_MODE: default
-  # search
-  ELASTICSEARCH_HOST: elasticsearch.db.svc.cluster.local
-  ELASTICSEARCH_PORT_NUMBER: '9200'
-  # db
-  MARIADB_HOST: mariadb.db.svc.cluster.local
-  MARIADB_PORT_NUMBER: '3306'
-  MAGENTO_DATABASE_USER: bn_magento
-  MAGENTO_DATABASE_PASSWORD: magento_db_password
-  MAGENTO_DATABASE_NAME: bitnami_magento
-  ALLOW_EMPTY_PASSWORD: 'no'
+  OPS_DEPLOY_INDEX: "0"
+  DB_HOST: mysql.db.svc.cluster.local
+  DB_NAME: magento
+  DB_USER: magento
+  DB_PASSWORD: magento
+  BASE_URL: http://localhost-magento.example.com/
+  ADMIN_FIRSTNAME: Magento
+  ADMIN_LASTNAME: User
+  ADMIN_EMAIL: user@example.com
+  ADMIN_USER: admin
+  ADMIN_PASSWORD: admin123
+  LANGUAGE: en_US
+  CURRENCY: USD
+  TIMEZONE: UTC
+  USE_REWRITES: "1"
+  BACKEND_FRONTNAME: admin_portal

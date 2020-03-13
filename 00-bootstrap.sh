@@ -30,21 +30,20 @@ main() {
   # Start minikube.
   setenv
   minikube start \
-    --memory=16384 --cpus=4 \
+    --memory='8000mb' --cpus=2 --disk-size='20000mb' \
     --kubernetes-version=${KUBE_VERSION} \
     --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/minikube/certs/ca.crt" \
     --extra-config=controller-manager.cluster-signing-key-file="/var/lib/minikube/certs/ca.key" \
     --extra-config=apiserver.service-node-port-range=80-30000 \
+    --insecure-registry="localhost-docker:5000" \
     --vm-driver=virtualbox
   echo ""
 
   # Check if minikube is up and kubectl is properly configured.
   minikube status
   kubectl cluster-info
-  # Re-use the docker daemon on local machine inside minikube.
-  eval $(minikube docker-env)
   # Create directories for persistent volumes.
-  minikube ssh "sudo mkdir -p /data/elasticsearch /data/mariadb /data/magento"
+  minikube ssh "sudo mkdir -p /data/mysql /data/magento"
   minikube ssh "sudo chown -R 1000:1000 /data/"
   # Elasticsearch requires vm.max_map_count to be at least 262144.
   # If your OS already sets up this number to a higher value, feel free
@@ -53,25 +52,9 @@ main() {
 
   echo "Enabling minikube addons."
   minikube addons enable metrics-server
-
-  echo "== Done for bootstrap."
+  minikube addons enable registry
 }
 
-
+## ============================
 main
 
-
-## ====== Documentary-Commands ======
-
-## Istio Bootstraps
-#export ISTIO_VERSION='1.4.2'
-#helm template $HOME/istio-$ISTIO_VERSION/install/kubernetes/helm/istio-init --name-template istio-init --namespace istio-system \
-#  > addons/istio-system/istio-crds/istio-crds.yml
-#helm template $HOME/istio-$ISTIO_VERSION/install/kubernetes/helm/istio --name-template istio --namespace istio-system \
-#  --set prometheus.enabled=false \
-#  --set tracing.enabled=false \
-#  \
-#  --set pilot.env.PILOT_ENABLE_FALLTHROUGH_ROUTE=1 \
-#  --set gateways.istio-ingressgateway.type=NodePort \
-#  \
-#  > addons/istio-system/istio/istio-install.yml
