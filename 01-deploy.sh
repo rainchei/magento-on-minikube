@@ -11,7 +11,7 @@ main() {
 
   local args="$1"
   local ns=$(echo $args | awk -F '/' '{print $1}')
-  local app=$($args | awk -F '/' '{print $2}')
+  local app=$(echo $args | awk -F '/' '{print $2}')
   local app_path="$(pwd)/deployments/${ns}/${app}/"
 
   if [[ -z "${ns}" ]] || [[ -z "${app}" ]]; then
