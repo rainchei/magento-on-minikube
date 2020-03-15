@@ -9,8 +9,9 @@ main() {
   cd $(dirname $0)
   setenv
 
-  local ns="$1"
-  local app="$2"
+  local args="$1"
+  local ns=$(echo $args | awk -F '/' '{print $1}')
+  local app=$($args | awk -F '/' '{print $2}')
   local app_path="$(pwd)/deployments/${ns}/${app}/"
 
   if [[ -z "${ns}" ]] || [[ -z "${app}" ]]; then
@@ -33,10 +34,10 @@ main() {
 }
 
 usage() {
-  echo "Usage: $0 <namespace> <app-name>"
+  echo "Usage: $0 <namespace>/<app-name>"
   echo ""
   echo "For example:"
-  echo "$0 app magento"
+  echo "$0 app/magento"
   exit 2
 }
 
