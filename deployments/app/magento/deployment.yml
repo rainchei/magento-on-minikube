@@ -19,7 +19,7 @@ spec:
           claimName: magento-pv-claim
       containers:
       - name: magento
-        image: rainchei/docker-magento:1.0.0-5-g72c4b03c76-20200315
+        image: rainchei/docker-magento:1.0.0-6-gc102fecea5-20200315
         envFrom:
         - configMapRef:
             name: magento
