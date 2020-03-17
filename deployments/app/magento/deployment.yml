@@ -19,15 +19,15 @@ spec:
       - name: magento-persistent-storage
         persistentVolumeClaim:
           claimName: magento-pv-claim
-#      initContainers:
-#      - name: magento-content
-#        image: rainchei/docker-magento-phpfpm:1.0.0-40-g371ab16-20200317
-#        volumeMounts:
-#        - name: shared-data
-#          mountPath: /mnt/
-#        command: ["/bin/bash", "-c"]
-#        args:
-#        - mv /var/www/magento2/* /mnt/
+      initContainers:
+      - name: magento-content
+        image: rainchei/docker-magento-phpfpm:foo
+        volumeMounts:
+        - name: shared-data
+          mountPath: /mnt/
+        command: ["/bin/bash", "-c"]
+        args:
+        - mv /var/www/magento2/* /mnt/
       containers:
 #      - name: magento-nginx
 #        image: rainchei/docker-magento-nginx:foo
@@ -39,11 +39,7 @@ spec:
 #        ports:
 #        - containerPort: 80
       - name: magento-phpfpm
-        image: rainchei/docker-magento-phpfpm:1.0.0-43-g3d6aa49-20200317
-#        lifecycle:
-#          postStart:
-#            exec:
-#              command: ["/bin/sh", "-c", "mv /var/www/magento2/* /var/www/html/"]
+        image: rainchei/docker-magento-phpfpm:foo
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/html
