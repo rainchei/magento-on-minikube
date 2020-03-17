@@ -35,11 +35,11 @@ spec:
         image: rainchei/docker-magento-nginx:1.0.0-66-gdff9715-20200318
         volumeMounts:
         - name: shared-data
-          mountPath: /usr/share/nginx/html
+          mountPath: /var/www/magento2
         - name: shared-pipe
           mountPath: /var/run/php
         - name: magento-persistent-storage
-          mountPath: /usr/share/nginx/html/pub/media
+          mountPath: /var/www/magento2/pub/media
         ports:
         - containerPort: 80
       - name: magento-phpfpm
