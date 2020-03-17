@@ -17,13 +17,13 @@ spec:
       - name: shared-data
         emptyDir: {}
       containers:
-      - name: busybox
-        image: busybox:1.31.1
-        volumeMounts:
-        - name: shared-data
-          mountPath: /var/www
       - name: nginx
         image: nginx:1.17.9
         volumeMounts:
         - name: shared-data
           mountPath: /usr/share/nginx/html
+      - name: debian
+        image: debian:bullseye
+        volumeMounts:
+        - name: shared-data
+          mountPath: /mnt/html
