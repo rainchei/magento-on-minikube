@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: busybox
+  name: debian
 spec:
   selector:
     matchLabels:
-      app: busybox
+      app: debian
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: busybox
+        app: debian
     spec:
       volumes:
       - name: shared-data
