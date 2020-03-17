@@ -40,10 +40,10 @@ spec:
 #        - containerPort: 80
       - name: magento-phpfpm
         image: rainchei/docker-magento-phpfpm:1.0.0-43-g3d6aa49-20200317
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/bin/sh", "-c", "mv /var/www/magento2/* /var/www/html/"]
+#        lifecycle:
+#          postStart:
+#            exec:
+#              command: ["/bin/sh", "-c", "mv /var/www/magento2/* /var/www/html/"]
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/html
