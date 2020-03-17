@@ -29,15 +29,15 @@ spec:
         args:
         - mv /var/www/magento2/* /mnt/
       containers:
-#      - name: magento-nginx
-#        image: rainchei/docker-magento-nginx:foo
-#        volumeMounts:
-#        - name: shared-data
-#          mountPath: /usr/share/nginx/html
-#        - name: magento-persistent-storage
-#          mountPath: /usr/share/nginx/html/pub/media
-#        ports:
-#        - containerPort: 80
+      - name: magento-nginx
+        image: rainchei/docker-magento-nginx:1.0.0-62-gb85dd20-20200318
+        volumeMounts:
+        - name: shared-data
+          mountPath: /usr/share/nginx/html
+        - name: magento-persistent-storage
+          mountPath: /usr/share/nginx/html/pub/media
+        ports:
+        - containerPort: 80
       - name: magento-phpfpm
         image: rainchei/docker-magento-phpfpm:1.0.0-62-gb85dd20-20200318
         volumeMounts:
