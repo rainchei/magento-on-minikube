@@ -15,7 +15,7 @@ spec:
     spec:
       volumes:
       - name: shared-data
-        emptydir: {}
+        emptyDir: {}
       containers:
       - name: busybox
         image: busybox:1.31.1
