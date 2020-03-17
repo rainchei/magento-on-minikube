@@ -21,7 +21,7 @@ spec:
           claimName: magento-pv-claim
       initContainers:
       - name: magento-content
-        image: rainchei/docker-magento-phpfpm:1.0.0-34-g6569a9f-20200317
+        image: rainchei/docker-magento-phpfpm:1.0.0-40-g371ab16-20200317
         volumeMounts:
         - name: shared-data
           mountPath: /mnt/
@@ -39,7 +39,7 @@ spec:
 #        ports:
 #        - containerPort: 80
       - name: magento-phpfpm
-        image: rainchei/docker-magento-phpfpm:1.0.0-34-g6569a9f-20200317
+        image: rainchei/docker-magento-phpfpm:1.0.0-40-g371ab16-20200317
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/magento2
