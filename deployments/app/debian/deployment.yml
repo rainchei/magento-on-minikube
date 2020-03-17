@@ -27,3 +27,8 @@ spec:
         volumeMounts:
         - name: shared-data
           mountPath: /mnt/html
+        command: ["/bin/bash", "-c"]
+        args:
+        - while true; do
+            sleep 30;
+          done
