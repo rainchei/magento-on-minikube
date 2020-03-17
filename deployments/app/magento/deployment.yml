@@ -39,7 +39,7 @@ spec:
 #        ports:
 #        - containerPort: 80
       - name: magento-phpfpm
-        image: rainchei/docker-magento-phpfpm:1.0.0-40-g371ab16-20200317
+        image: rainchei/docker-magento-phpfpm:1.0.0-43-g3d6aa49-20200317
         lifecycle:
           postStart:
             exec:
