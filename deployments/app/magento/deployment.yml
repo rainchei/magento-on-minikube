@@ -16,6 +16,8 @@ spec:
       volumes:
       - name: shared-data
         emptyDir: {}
+      - name: shared-pipe
+        emptyDir: {}
       - name: magento-persistent-storage
         persistentVolumeClaim:
           claimName: magento-pv-claim
@@ -30,10 +32,12 @@ spec:
         - mv /var/www/magento2/* /mnt/
       containers:
       - name: magento-nginx
-        image: rainchei/docker-magento-nginx:1.0.0-62-gb85dd20-20200318
+        image: rainchei/docker-magento-nginx:1.0.0-63-g71a720a-20200318
         volumeMounts:
         - name: shared-data
           mountPath: /usr/share/nginx/html
+        - name: shared-pipe
+          mountPath: /var/run/php
         - name: magento-persistent-storage
           mountPath: /usr/share/nginx/html/pub/media
         ports:
@@ -43,6 +47,8 @@ spec:
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/magento2
+        - name: shared-pipe
+          mountPath: /var/run/php
         - name: magento-persistent-storage
           mountPath: /var/www/magento2/pub/media
         envFrom:
