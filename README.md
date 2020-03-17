@@ -20,19 +20,17 @@ Please start `Docker.app` before running the following commands.
 ./00-bootstrap.sh
 
 # Append minikube ip to /etc/hosts
-echo $(minikube ip) localhost-docker | sudo tee -a /etc/hosts
 echo $(minikube ip) localhost-magento.example.com | sudo tee -a /etc/hosts
 ```
 
 # Deployment
 
-Finally, run these commands to deploy our magento app and its relevant db.
+Finally, use `01-deploy.sh` to deploy app and db. For example,
 
 ```
-./01-deploy.sh db mysql
-./01-deploy.sh db elasticsearch
-./01-deploy.sh db redis
-./01-deploy.sh app magento
+./01-deploy.sh db/mysql
+./01-deploy.sh db/redis
+./01-deploy.sh app/magento
 ```
 
 Then you can access your application at http://localhost-magento.example.com

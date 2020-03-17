@@ -35,7 +35,6 @@ main() {
     --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/minikube/certs/ca.crt" \
     --extra-config=controller-manager.cluster-signing-key-file="/var/lib/minikube/certs/ca.key" \
     --extra-config=apiserver.service-node-port-range=80-30000 \
-    --insecure-registry="localhost-docker:5000" \
     --vm-driver=virtualbox
   echo ""
 
@@ -52,7 +51,6 @@ main() {
 
   echo "Enabling minikube addons."
   minikube addons enable metrics-server
-  minikube addons enable registry
 }
 
 ## ============================
