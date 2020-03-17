@@ -21,13 +21,13 @@ spec:
           claimName: magento-pv-claim
       initContainers:
       - name: magento-content
-        image: rainchei/docker-magento:1.0.0-27-g98ef141-20200317
+        image: rainchei/docker-magento:foo
         volumeMounts:
         - name: shared-data
           mountPath: /mnt/
         command: ["/bin/bash", "-c"]
         args:
-        - mv /var/www/magento2 /mnt/magento2
+        - mv /var/www/magento2/* /mnt/*
       containers:
       - name: magento-nginx
         image: nginx:1.17.9
@@ -39,7 +39,7 @@ spec:
         ports:
         - containerPort: 80
       - name: magento-phpfpm
-        image: rainchei/docker-magento:1.0.0-27-g98ef141-20200317
+        image: rainchei/docker-magento:foo
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/magento2
