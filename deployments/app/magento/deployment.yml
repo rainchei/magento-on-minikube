@@ -42,9 +42,9 @@ spec:
         image: rainchei/docker-magento-phpfpm:foo
         volumeMounts:
         - name: shared-data
-          mountPath: /var/www/html
+          mountPath: /var/www/magento2
         - name: magento-persistent-storage
-          mountPath: /var/www/html/pub/media
+          mountPath: /var/www/magento2/pub/media
         envFrom:
         - configMapRef:
             name: magento
