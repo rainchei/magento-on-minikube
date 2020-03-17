@@ -40,6 +40,7 @@ spec:
 #        - containerPort: 80
       - name: magento-phpfpm
         image: rainchei/docker-magento-phpfpm:1.0.0-44-g2d7df48-20200317
+        command: ["/bin/bash", "-c", "/etc/entrypoint.sh"]
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/magento2
