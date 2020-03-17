@@ -14,20 +14,40 @@ spec:
         app: magento
     spec:
       volumes:
+      - name: shared-data
+        emptyDir: {}
       - name: magento-persistent-storage
         persistentVolumeClaim:
           claimName: magento-pv-claim
+      initContainers:
+      - name: magento-content
+        image: rainchei/docker-magento:1.0.0-27-g98ef141-20200317
+        volumeMounts:
+        - name: shared-data
+          mountPath: /mnt/
+        command: ["/bin/bash", "-c"]
+        args:
+        - mv /var/www/magento2 /mnt/magento2
       containers:
-      - name: magento
-        image: rainchei/docker-magento:1.0.0-25-gbdb61d8-20200316
+      - name: magento-nginx
+        image: nginx:1.17.9
+        volumeMounts:
+        - name: shared-data
+          mountPath: /usr/share/nginx/html
+        - name: magento-persistent-storage
+          mountPath: /usr/share/nginx/html/pub/media
+        ports:
+        - containerPort: 80
+      - name: magento-phpfpm
+        image: rainchei/docker-magento:1.0.0-27-g98ef141-20200317
+        volumeMounts:
+        - name: shared-data
+          mountPath: /var/www/magento2
+        - name: magento-persistent-storage
+          mountPath: /var/www/magento2/pub/media
         envFrom:
         - configMapRef:
             name: magento
-        volumeMounts:
-        - name: magento-persistent-storage
-          mountPath: /var/www/html/pub/media
-        ports:
-        - containerPort: 80
         resources:
           limits:
             cpu: 1000m
