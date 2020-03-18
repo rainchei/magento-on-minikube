@@ -21,18 +21,18 @@ spec:
       - name: magento-persistent-storage
         persistentVolumeClaim:
           claimName: magento-pv-claim
-#      initContainers:
-#      - name: magento-content
-#        image: rainchei/docker-magento-phpfpm:foo
-#        volumeMounts:
-#        - name: shared-data
-#          mountPath: /mnt/
-#        command: ["/bin/bash", "-c"]
-#        args:
-#        - mv /var/www/magento2/* /mnt/
+      initContainers:
+      - name: magento-contents
+        image: rainchei/docker-magento-phpfpm:1.0.0-73-g8707b0f-20200318
+        volumeMounts:
+        - name: shared-data
+          mountPath: /var/www/html
+        command: ["/bin/bash", "-c"]
+        args:
+        - bsdtar -xzpf /var/www/mage2bak.tar.gz -C /var/www/html/
       containers:
       - name: magento-nginx
-        image: rainchei/docker-magento-nginx:1.0.0-70-g85a2104-20200318
+        image: rainchei/docker-magento-nginx:1.0.0-73-g8707b0f-20200318
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/html
@@ -43,7 +43,7 @@ spec:
         ports:
         - containerPort: 80
       - name: magento-phpfpm
-        image: rainchei/docker-magento-phpfpm:1.0.0-70-g85a2104-20200318
+        image: rainchei/docker-magento-phpfpm:1.0.0-73-g8707b0f-20200318
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/html
@@ -51,10 +51,6 @@ spec:
           mountPath: /var/run/php
         - name: magento-persistent-storage
           mountPath: /var/www/html/pub/media
-        lifecycle:
-          postStart:
-            exec:
-              command: ["/bin/bash", "-c", "bsdtar -xzpf /var/www/mage2bak.tar.gz -C /var/www/html/"]
         envFrom:
         - configMapRef:
             name: magento
