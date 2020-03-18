@@ -23,7 +23,7 @@ spec:
           claimName: magento-pv-claim
 #      initContainers:
 #      - name: magento-content
-#        image: rainchei/docker-magento-phpfpm:1.0.0-63-g71a720a-20200318
+#        image: rainchei/docker-magento-phpfpm:foo
 #        volumeMounts:
 #        - name: shared-data
 #          mountPath: /mnt/
@@ -32,7 +32,7 @@ spec:
 #        - mv /var/www/magento2/* /mnt/
       containers:
       - name: magento-nginx
-        image: rainchei/docker-magento-nginx:1.0.0-67-gcf8aea9-20200318
+        image: rainchei/docker-magento-nginx:foo
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/html
@@ -43,7 +43,7 @@ spec:
         ports:
         - containerPort: 80
       - name: magento-phpfpm
-        image: rainchei/docker-magento-phpfpm:1.0.0-63-g71a720a-20200318
+        image: rainchei/docker-magento-phpfpm:bar
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/html
@@ -56,9 +56,7 @@ spec:
             exec:
               command: ["/bin/bash", "-c"]
               args:
-              - mv /var/www/mage2.tar.gz /var/www/html/ \
-                && cd /var/www/html/ \
-                && tar -xvzpf mage2.tar.gz
+              - bsdtar -xzpf /var/www/mage2bak.tar.gz -C /var/www/html/
         envFrom:
         - configMapRef:
             name: magento
