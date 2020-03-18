@@ -32,7 +32,7 @@ spec:
 #        - mv /var/www/magento2/* /mnt/
       containers:
       - name: magento-nginx
-        image: rainchei/docker-magento-nginx:foo
+        image: rainchei/docker-magento-nginx:1.0.0-70-g85a2104-20200318
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/html
@@ -43,7 +43,7 @@ spec:
         ports:
         - containerPort: 80
       - name: magento-phpfpm
-        image: rainchei/docker-magento-phpfpm:bar
+        image: rainchei/docker-magento-phpfpm:1.0.0-70-g85a2104-20200318
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/html
