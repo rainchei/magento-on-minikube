@@ -21,36 +21,44 @@ spec:
       - name: magento-persistent-storage
         persistentVolumeClaim:
           claimName: magento-pv-claim
-      initContainers:
-      - name: magento-content
-        image: rainchei/docker-magento-phpfpm:1.0.0-63-g71a720a-20200318
-        volumeMounts:
-        - name: shared-data
-          mountPath: /mnt/
-        command: ["/bin/bash", "-c"]
-        args:
-        - mv /var/www/magento2/* /mnt/
+#      initContainers:
+#      - name: magento-content
+#        image: rainchei/docker-magento-phpfpm:1.0.0-63-g71a720a-20200318
+#        volumeMounts:
+#        - name: shared-data
+#          mountPath: /mnt/
+#        command: ["/bin/bash", "-c"]
+#        args:
+#        - mv /var/www/magento2/* /mnt/
       containers:
       - name: magento-nginx
         image: rainchei/docker-magento-nginx:1.0.0-67-gcf8aea9-20200318
         volumeMounts:
         - name: shared-data
-          mountPath: /var/www/magento2
+          mountPath: /var/www/html
         - name: shared-pipe
           mountPath: /var/run/php
         - name: magento-persistent-storage
-          mountPath: /var/www/magento2/pub/media
+          mountPath: /var/www/html/pub/media
         ports:
         - containerPort: 80
       - name: magento-phpfpm
         image: rainchei/docker-magento-phpfpm:1.0.0-63-g71a720a-20200318
         volumeMounts:
         - name: shared-data
-          mountPath: /var/www/magento2
+          mountPath: /var/www/html
         - name: shared-pipe
           mountPath: /var/run/php
         - name: magento-persistent-storage
-          mountPath: /var/www/magento2/pub/media
+          mountPath: /var/www/html/pub/media
+        lifecycle:
+          postStart:
+            exec:
+              command: ["/bin/bash", "-c"]
+              args:
+              - mv /var/www/mage2.tar.gz /var/www/html/ \
+                && cd /var/www/html/ \
+                && tar -xvzpf mage2.tar.gz
         envFrom:
         - configMapRef:
             name: magento
