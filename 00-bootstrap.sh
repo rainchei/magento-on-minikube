@@ -43,7 +43,7 @@ main() {
   kubectl cluster-info
   # Create directories for persistent volumes.
   minikube ssh "sudo mkdir -p /data/mysql /data/magento"
-  minikube ssh "sudo chown -R 1000:1000 /data/"
+  minikube ssh "sudo chown -R www-data:www-data /data/"
   # Elasticsearch requires vm.max_map_count to be at least 262144.
   # If your OS already sets up this number to a higher value, feel free
   # to remove this line.
