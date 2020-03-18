@@ -54,9 +54,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/bash", "-c"]
-              args:
-              - bsdtar -xzpf /var/www/mage2bak.tar.gz -C /var/www/html/
+              command: ["/bin/bash", "-c", "bsdtar -xzpf /var/www/mage2bak.tar.gz -C /var/www/html/"]
         envFrom:
         - configMapRef:
             name: magento
