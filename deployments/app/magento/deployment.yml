@@ -23,7 +23,7 @@ spec:
           claimName: magento-pv-claim
       initContainers:
       - name: magento-contents
-        image: rainchei/docker-magento-contents:1.0.0-107-gd8026000-20200324
+        image: rainchei/docker-magento-contents:1.0.0-108-ge815cfaa-20200325
         volumeMounts:
         - name: shared-data
           mountPath: /var/www/html
