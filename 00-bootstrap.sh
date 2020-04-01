@@ -34,7 +34,7 @@ main() {
     --kubernetes-version=${KUBE_VERSION} \
     --extra-config=controller-manager.cluster-signing-cert-file="/var/lib/minikube/certs/ca.crt" \
     --extra-config=controller-manager.cluster-signing-key-file="/var/lib/minikube/certs/ca.key" \
-    --extra-config=apiserver.service-node-port-range=80-30000 \
+    --extra-config=apiserver.service-node-port-range=1-65535 \
     --vm-driver=virtualbox
   echo ""
 
